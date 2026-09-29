@@ -1,20 +1,18 @@
 #pragma once
+#include "FLinked.h"
+#include "FLinked.h"
 
-template <class T> 
-class Node {
+
+template <class T> class Node {
 private:
     T data;
     Node<T>* next;
-
 public:
     Node(T data);
-    Node(T data, Node<T>* next); 
-
+    Node (T data, node<T>* next);
     T getData();
     Node<T>* getNext();
     void setData(T data);
-    void setNext(Node<T>* next); 
-};
+    void setNext(node<T>* next);
 
-// Se incluye al final el cpp para la conexion de la template
-#include "Node.cpp"
+};
