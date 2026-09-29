@@ -8,36 +8,37 @@ FLinked<T>::FLinked() {
 
 template<class T>
 void FLinked<T>::create(int pos, int data) {
-    // se recibe la posicion y el dato a ingresar en la lista
-    // si el index es mayor al tamaño total de la lista, entonces se pone al final(tipo add)
+    /* Se recibe la posición y el dato a ingresar en la lista.
+    Si el index es mayor al tamaño total de la lista, entonces se pone al final. */
     node<T>* nuevo = new node<T>;
     nuevo->data = data;
     nuevo->next = nullptr;
 
     if (!head) {
-        head->next = nuevo;
         head = nuevo;
-    }else {
-        nuevo = head;
+		std:: cout << "Se agrego un nuevo elemento." << "\n";
+    }
+    else {
+        node<T>* curr = head;
+
         for (int i = 0; i < pos; i++) {
-            nuevo = nuevo->next;
-            if (nuevo->next == nullptr) {
-                std:: cout <<"se llegó a la última parte de la lista" << "\n";
-
+            curr = curr->next;
+            if (curr->next == nullptr) {
+			/* Se camina según la posición hasta que se llega a -> next = nullptr,
+            lo que quiere decir que la lista ya está vacía. */
+                std:: cout <<"Se llego a la ultima parte de la lista." << "\n";
+				std:: cout << "La posicion supero el largo de la lista, con lo que se ingresa al final." << "\n";
+				curr->next = nuevo; 
+				curr = nuevo;
+				
                 break;
-
-
             }
-            // se camina según la pos hasta que se llega a -> next = nullptr,
-            // quiere decir que la lista ya esta vacía
         }
     }
-
-
-}
+};
 
 template<class T>
-void FLinked<T>::update() {
+void FLinked<T>::update(int, int) {
 }
 
 template<class T>
