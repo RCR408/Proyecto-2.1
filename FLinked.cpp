@@ -1,7 +1,6 @@
 #include "FLinked.h"
 #include <iostream>
 
-
 template<class T>
 FLinked<T>::FLinked() {
     head = nullptr;
@@ -48,6 +47,21 @@ void FLinked<T>::add(T data) {
 
 template<class T>
 T FLinked<T>::get(int index) {
-
+        if (index == 0) {
+		// Get the first element
+		return this->first->data;
+	}
+	else {
+		// Get the index'th element
+		node<T>* curr = this->first;
+		for (int i = 0; i < index; ++i) {
+			curr = curr->next;
+		}
+		return curr->data;
+	}
 }
 
+template <class T>
+T FLinked<T>::operator[](int index) {
+	return get(index);
+}
