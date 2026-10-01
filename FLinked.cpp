@@ -6,36 +6,32 @@ FLinked<T>::FLinked() {
     head = nullptr;
 }
 
-template<class T>
+template <class T>
 void FLinked<T>::create(int pos, T data) {
-    /* Se recibe la posición y el dato a ingresar en la lista.
-    Si el index es mayor al tamaño total de la lista, entonces se pone al final. */
+    // para guardar los datos recibidos ya en un nodo nuevo
     node<T>* nuevo = new node<T>;
     nuevo->data = data;
     nuevo->next = nullptr;
 
-    if (!head) {
+    // para intertarlo al inicio de la lista o cuando la lista esta vacia
+    if (head == nullptr || pos <= 0) {
+        nuevo->next = head;
         head = nuevo;
-		std:: cout << "Se agrego un nuevo elemento." << "\n";
+        return;
     }
-    else {
-        node<T>* curr = head;
 
-        for (int i = 0; i < pos; i++) {
-            curr = curr->next;
-            if (curr->next == nullptr) {
-			/* Se camina según la posición hasta que se llega a -> next = nullptr,
-            lo que quiere decir que la lista ya está vacía. */
-                std:: cout <<"Se llego a la ultima parte de la lista." << "\n";
-				std:: cout << "La posicion supero el largo de la lista, con lo que se ingresa al final." << "\n";
-				curr->next = nuevo; 
-				curr = nuevo;
-				
-                break;
-            }
-        }
-
+    // para insertarlo en el medio o final se camina
+    node<T>* curr = head;
+    int index = 0;
+    // avanzar hasta donde el index ingresado - 1 para hacer el enlace
+    while (index < pos - 1 && curr->next != nullptr) {
+        curr = curr->next;
+        index++;
     }
+
+    // Enlazar nuevo nodo
+    nuevo->next = curr->next;
+    curr->next = nuevo;
 }
 
 template<class T>
@@ -43,21 +39,17 @@ int FLinked<T>::read(T t) {
     node<T>* curr = head;
     int i = 0;
 
-    while (true) {
-        T temp = curr->data;
-
-        if (temp == t) {
+    while (curr != nullptr) {
+        if (curr->data == t) {
             std::cout << "El dato se encuentra en el index: "<< i << std::endl;
             return i;
-        }
-        
-        if (curr->next == nullptr) {
-            std::cout << "No se encontro el dato." << std::endl;
-            return -1;
         }
         i++;
         curr = curr->next;
     }
+
+    std::cout << "No se encontro el dato." << std::endl;
+    return -1;
 }
 
 
@@ -66,13 +58,17 @@ void FLinked<T>::add(T data) {
     node<T>* curr = head;
 
     if (curr == nullptr) {
-        head = new node<T>{ data,nullptr };
+        head = new node<T>;
+        head->data = data;
+        head->next = nullptr;
         return;
     }
 
     while (true) {
         if (curr->next == nullptr) {
-            curr->next = new node<T>{ data,nullptr };
+            curr->next = new node<T>;
+            curr->next->data = data;
+            curr->next->next = nullptr;
             break;
         }
         curr = curr->next;
@@ -82,23 +78,18 @@ void FLinked<T>::add(T data) {
 template<class T>
 void FLinked<T>::update(int index, T newValue) {
     node<T>* curr = head;
-    if (head == nullptr)
-        return;
-    for (int i = 0; i < index; i++) {
-        if (curr == nullptr) {
-            return;
-        }
+    for (int i = 0; curr != nullptr && i < index; i++)
         curr = curr->next;
-    }
 
-    curr->data = newValue;
+    if (curr != nullptr)
+        curr->data = newValue;
 }
 
 template<class T>
 void FLinked<T>::delf(T value) {
    node<T>* last = nullptr;
    node<T>* curr = head;
-   while (true) {
+    while (curr != nullptr) {
        if (curr->data == value) {
            if (last == nullptr) {
                head = curr->next;
@@ -111,33 +102,23 @@ void FLinked<T>::delf(T value) {
            break;
        }
 
-       if (curr->next == nullptr) {
-           std::cout << "No se encontro el dato a eliminar." << std::endl;
-           break;
-       }
-
        last = curr;
        curr = curr->next;
    }
+
+   std::cout << "No se encontro el dato a eliminar." << std::endl;
 }
 
 template<class T>
 T FLinked<T>::get(int index) {
-        if (index == 0) {
-		// Get the first element
-		return head->data;
-	}
-	else {
-		// Get the index'th element
-		node<T>* curr = head;
-		for (int i = 0; i < index; ++i) {
-            if (curr->next) {
-                return T{};
-            }
-			curr = curr->next;
-		}
-		return curr->data;
-	}
+    if (index < 0)
+        return T{};
+
+    node<T>* curr = head;
+    for (int i = 0; curr != nullptr && i < index; ++i)
+        curr = curr->next;
+
+    return curr == nullptr ? T{} : curr->data;
 }
 
 template <class T>

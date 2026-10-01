@@ -33,3 +33,5 @@ public:
 	T operator[](int);
 };
 
+#include "FLinked.cpp"
+

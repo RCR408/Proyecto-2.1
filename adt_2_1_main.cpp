@@ -1,14 +1,12 @@
 #include <iostream>
 #include "FLinked.h"
-#include "FLinked.cpp"
-#include "Node.cpp"
 
 int main() {
     FLinked<int> list;
-    list.add(1);
-    list.add(2);
-    list.add(3);
-    list.add(4);
+    list.create(1, 2);
+    list.create(2, 5);
+    list.create(3, 7);
+    list.create(4, 9);
 
     int i = 0;
     for (i = 0; i <= 3; i++)

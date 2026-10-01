@@ -6,7 +6,7 @@ Node<T>::Node(T data) {
 }
 
 template<class T>
-Node<T>::Node(T data, node<T> *next) {
+Node<T>::Node(T data, Node<T> *next) {
     this->data = data;
     this->next = next;
 }
@@ -27,6 +27,6 @@ void Node<T>::setData(T data) {
 }
 
 template<class T>
-void Node<T>::setNext(node<T> *next) {
+void Node<T>::setNext(Node<T> *next) {
     this->next = next;
 }

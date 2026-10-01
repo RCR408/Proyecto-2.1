@@ -8,9 +8,9 @@ private:
     Node<T>* next;
 public:
     Node(T);
-    Node (T, node<T>*);
+    Node(T, Node<T>*);
     T getData() const;
     Node<T>* getNext();
     void setData(T);
-    void setNext(node<T>*);
+    void setNext(Node<T>*);
 };

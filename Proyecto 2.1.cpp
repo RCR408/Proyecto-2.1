@@ -16,7 +16,7 @@ int main()
         std::cout << list.get(i);
 
     //list.update(2);
-    list.delete2();
+    list.delf(2);
 
     for (i = 0; i <= 3; i++)
         std::cout << list.get(i);
