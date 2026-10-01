@@ -32,3 +32,4 @@ public:
 	// Sobrecarga del operador [] para acceder a los elementos de la lista mediante un índice.
 	T operator[](int);
 };
+
