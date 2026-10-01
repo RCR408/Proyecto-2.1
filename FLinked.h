@@ -12,16 +12,16 @@ public:
     FLinked();
 
     // CREATE: insertar un nodo en la lista.
-    void create(int, int);
+    void create(int, T);
     
     // READ: devolver un nodo de la lista con las condiciones solicitadas.
-    void read(int);
+    int read(T);
 
     // UPDATE: 
-    void update(int, int);
+    void update(int, T);
 
     // DELETE: recibe un índice y elimina el nodo correspondiente de la lista.
-    void delete(T);
+    void delf(T);
 
 	// ADD: recibe un dato y lo agrega al final de la lista.
 	void add(T);
