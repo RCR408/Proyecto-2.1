@@ -78,6 +78,7 @@ void FLinked<T>::add(T data) {
 template<class T>
 void FLinked<T>::update(int index, T newValue) {
     node<T>* curr = head;
+    // separar en if 
     for (int i = 0; curr != nullptr && i < index; i++)
         curr = curr->next;
 
