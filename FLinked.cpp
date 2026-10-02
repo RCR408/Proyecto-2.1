@@ -13,7 +13,7 @@ void FLinked<T>::create(int pos, T data) {
     nuevo->data = data;
     nuevo->next = nullptr;
 
-    // para intertarlo al inicio de la lista o cuando la lista esta vacia
+    // para insertarlo al inicio de la lista o cuando la lista esta vacia
     if (head == nullptr || pos <= 0) {
         nuevo->next = head;
         head = nuevo;
@@ -29,7 +29,7 @@ void FLinked<T>::create(int pos, T data) {
         index++;
     }
 
-    // Enlazar nuevo nodo
+    // Enlazar nuevo nodo primero conectando next del nuevo
     nuevo->next = curr->next;
     curr->next = nuevo;
 }
@@ -39,16 +39,17 @@ int FLinked<T>::read(T t) {
     node<T>* curr = head;
     int i = 0;
 
+    // se camina con ayuda de curr hasta que se encuentre con el ultimo
     while (curr != nullptr) {
         if (curr->data == t) {
-            std::cout << "El dato se encuentra en el index: "<< i << std::endl;
+            std::cout << "El dato se encuentra en el index: "<< i << "\n";
             return i;
         }
         i++;
         curr = curr->next;
     }
-
-    std::cout << "No se encontro el dato." << std::endl;
+    // si es que se sale del while, se sabría que no se encontro el dato 
+    std::cout << "No se encontro el dato." << "\n";
     return -1;
 }
 
@@ -76,38 +77,49 @@ void FLinked<T>::add(T data) {
 }
 
 template<class T>
-void FLinked<T>::update(int index, T newValue) {
+void FLinked<T>::update(int index, T datarec) {
     node<T>* curr = head;
-    // separar en if 
-    for (int i = 0; curr != nullptr && i < index; i++)
-        curr = curr->next;
 
+    for (int i = 0; i < index; i++){
+        // se asegura que no se quede sin nodos
+        if(curr == nullptr){
+            break;
+        }
+        curr = curr->next;
+    }
+
+    // si hay nodo en la posicion, se cambia el valor
     if (curr != nullptr)
-        curr->data = newValue;
+        curr->data = datarec;
 }
 
 template<class T>
 void FLinked<T>::delf(T value) {
-   node<T>* last = nullptr;
+    // funcion para eliminar el data del nodo
+   node<T>* prev = nullptr;
    node<T>* curr = head;
     while (curr != nullptr) {
+
        if (curr->data == value) {
-           if (last == nullptr) {
-               head = curr->next;
-               delete curr;
-               break;
-           }
+            if (prev == nullptr) {
+                head = curr->next; 
+                // Se actualiza puntero del head
+            } else {
+                prev->next = curr->next; 
+                // Se la conexion de los punteros antes de eliminarlo
+            }
 
-           last->next = curr->next;
-           delete curr;
-           break;
-       }
+            delete curr; 
+            // se borra ahora si
+            return;      
+            // Se sale de la funcion una vez que se borra
+        }
 
-       last = curr;
+       prev = curr;
        curr = curr->next;
    }
 
-   std::cout << "No se encontro el dato a eliminar." << std::endl;
+   std::cout << "No se encontro el dato a eliminar." << "\n";
 }
 
 template<class T>
@@ -118,11 +130,14 @@ T FLinked<T>::get(int index) {
     node<T>* curr = head;
     for (int i = 0; curr != nullptr && i < index; ++i)
         curr = curr->next;
-
+        // if else para regresar segun lo que sea curr
+        // si se es nullptr regresa el t generico
+        // de lo contrario se regresa el data
     return curr == nullptr ? T{} : curr->data;
 }
 
 template <class T>
 T FLinked<T>::operator[](int index) {
+    // se reusa la logica de la funcion get 
 	return get(index);
 }
