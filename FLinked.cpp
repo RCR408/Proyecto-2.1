@@ -159,5 +159,5 @@ porque se asume que ya se tiene ubicado el nodo o la posición donde se va a
 insertar o eliminar.
 
 En este código no siempre es O(1), porque primero se recorre la lista para
-encontrar la posición o el valor.
+encontrar la posición o el valor con el que se va a trabajar.
 */
