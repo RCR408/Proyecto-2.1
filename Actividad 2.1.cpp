@@ -1,3 +1,8 @@
+/* Programa para probar el funcionamiento de Linked Lists en C++.
+Autores: Dante Martínez Domínguez, Rubén Caro Romero y Santiago Cavazos Nuñez.
+Fecha: 01/10/26
+*/
+
 #include <iostream>
 #include "FLinked.h"
 
