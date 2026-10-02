@@ -140,3 +140,24 @@ T FLinked<T>::operator[](int index) {
     // Se reusa la lógica de la funcion get().
 	return get(index);
 }
+
+/* La complejidad computacional temporal de los métodos de la clase FLinked es:
+(tomando el peor caso):
+create      -> O(n)
+read        -> O(n)
+add         -> O(n)
+update      -> O(n)
+delf        -> O(n)
+get         -> O(n)
+operator[]  -> O(n)
+
+Es decir, de O(n) para todos los métodos, al depender cada uno de la cantidad de nodos a recorrer.
+Esto concuerda con la complejidad temporal de la lista enlazada simple, que es de O(n).
+
+NOTA. En Big O Sheet, insertion y deletion en linked lists aparecen como O(1)
+porque se asume que ya se tiene ubicado el nodo o la posición donde se va a
+insertar o eliminar.
+
+En este código no siempre es O(1), porque primero se recorre la lista para
+encontrar la posición o el valor.
+*/
