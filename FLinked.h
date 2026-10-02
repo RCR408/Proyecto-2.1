@@ -34,4 +34,3 @@ public:
 };
 
 #include "FLinked.cpp"
-
